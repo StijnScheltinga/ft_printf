@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 17:19:09 by sschelti          #+#    #+#             */
-/*   Updated: 2022/10/31 17:21:32 by sschelti         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:30:51 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	ft_print_x_up(unsigned int i)
 	char			*hex;
 	unsigned int	size;
 
+	if (i == 0)
+		return (ft_putchrp('0'));
 	size = ft_size(i);
 	hex = (char *)malloc(sizeof(char) * (size + 1));
 	if (!hex)

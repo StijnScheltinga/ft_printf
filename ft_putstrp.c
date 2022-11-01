@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:57:55 by sschelti          #+#    #+#             */
-/*   Updated: 2022/10/31 17:01:42 by sschelti         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:00:11 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	ft_putstrp(const char *str)
 
 	i = 0;
 	if (!str)
-		return (0);
+		return (ft_putstrp("(null)"));
 	while (str[i])
 	{
 		write(1, &str[i], 1);
 		i++;
 	}
-	return (i - 1);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:06:45 by sschelti          #+#    #+#             */
-/*   Updated: 2022/10/31 17:29:07 by sschelti         ###   ########.fr       */
+/*   Updated: 2022/11/01 13:52:54 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,28 @@
 
 static int	conversion(const char *str, va_list list, int i)
 {
-	int	j;
+	int	length;
 
-	j = 0;
+	length = 0;
 	if (str[i] == 'c')
-		j += ft_putchrp(va_arg(list, int));
+		length += ft_putchrp(va_arg(list, int));
 	if (str[i] == 's')
-		j += ft_putstrp(va_arg(list, const char *));
+		length += ft_putstrp(va_arg(list, const char *));
 	if (str[i] == 'd' || str[i] == 'i')
-		j += ft_put_i(va_arg(list, int));
+		length += ft_put_i(va_arg(list, int));
 	if (str[i] == 'p')
-		j += ft_printp(va_arg(list, void *));
+		length += ft_printp(va_arg(list, void *));
 	if (str[i] == 'x')
-		j += ft_print_x(va_arg(list, unsigned int));
+		length += ft_print_x(va_arg(list, unsigned int));
 	if (str[i] == 'X')
-		j += ft_print_x_up(va_arg(list, unsigned int));
-	return (j);
+		length += ft_print_x_up(va_arg(list, unsigned int));
+	if (str[i] == 'u')
+		length += ft_print_u(va_arg(list, unsigned int));
+	if (str[i] == '%')
+		length += ft_putchrp('%');
+	return (length);
 }
 
-//main function
 int	ft_printf(const char *str, ...)
 {
 	int		i;
@@ -50,29 +53,30 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			length += conversion(str, list, (i + 1));
-			length--;
-			i++;
+			i += 2;
 		}
 		else
-			ft_putchrp(str[i]);
-		i++;
+		{
+			length += ft_putchrp(str[i]);
+			i++;
+		}
 	}
 	va_end(list);
-	return (length + i);
+	return (length);
 }
 
-int	main()
-{
-	char		c;
-	const char	*arr;
-	int			d;
-	void		*p;
+// int	main()
+// {
+// 	char		c;
+// 	const char	*arr;
+// 	int			d;
+// 	void		*p;
 
-	c = 'A';
-	arr = "hjghtetertrkltdk";
-	d = 214746;
-	p = &c;
-	printf("mijne: %d\n", ft_printf("char: %X char: %i\n", d, d));
-	printf("echte: %d\n", printf("char: %X char: %i\n", d, d));
-	return (0);
-}
+// 	c = 'a';
+// 	arr = "hjghtetertrkltdk";
+// 	d = -22;
+// 	p = NULL;
+// 	printf("mijne: %d\n", ft_printf("char: %u char: %p\n", d, p));
+// 	printf("echte: %d\n", printf("char: %u char: %p\n", d, p));
+// 	return (0);
+// }

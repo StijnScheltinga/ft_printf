@@ -1,4 +1,4 @@
-SOURCES	=	ft_putchrp.c ft_putstrp.c ft_put_i.c ft_printf.c ft_printp.c ft_print_x.c ft_print_x_up.c
+SOURCES	=	ft_putchrp.c ft_putstrp.c ft_put_i.c ft_printf.c ft_printp.c ft_print_x.c ft_print_x_up.c ft_print_u.c ft_itoa_u.c
 OBJECTS =	$(SOURCES:.c=.o)
 NAME 	=	libftprintf.a
 

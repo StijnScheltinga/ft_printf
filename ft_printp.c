@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:02:55 by sschelti          #+#    #+#             */
-/*   Updated: 2022/10/31 17:01:50 by sschelti         ###   ########.fr       */
+/*   Updated: 2022/11/01 13:51:29 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_printp(void *p)
 	unsigned int	size;
 
 	if (!p)
-		return (0);
+		return (ft_putstrp("0x0"));
 	a = (unsigned long) p;
 	size = ft_size(a);
 	hex = (char *)malloc(sizeof(char) * (size + 1));
