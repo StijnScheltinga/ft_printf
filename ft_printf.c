@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:06:45 by sschelti          #+#    #+#             */
-/*   Updated: 2022/11/01 13:52:54 by sschelti         ###   ########.fr       */
+/*   Updated: 2022/11/01 14:59:28 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			length += conversion(str, list, (i + 1));
-			i += 2;
-		}
-		else
-		{
-			length += ft_putchrp(str[i]);
 			i++;
 		}
+		else
+			length += ft_putchrp(str[i]);
+		if (str[i] != '\0')
+			i++;
 	}
 	va_end(list);
 	return (length);
@@ -76,7 +75,7 @@ int	ft_printf(const char *str, ...)
 // 	arr = "hjghtetertrkltdk";
 // 	d = -22;
 // 	p = NULL;
-// 	printf("mijne: %d\n", ft_printf("char: %u char: %p\n", d, p));
-// 	printf("echte: %d\n", printf("char: %u char: %p\n", d, p));
+// 	printf("mijne: %d\n", ft_printf("hello%"));
+// 	// printf("echte: %d\n", printf("hello%"));
 // 	return (0);
 // }

@@ -13,7 +13,7 @@ $(NAME): $(OBJECTS)
 	gcc -Wall -Wextra -Werror -c $< -o $@ 
 
 gcc:
-	gcc -Wall -Werror -Wextra ft_printf.c $(NAME) libft/libft.a
+	gcc -Wall -Werror -Wextra ft_printf.c $(NAME)
 
 clean:
 	rm -f $(OBJECTS)
