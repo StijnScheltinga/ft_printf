@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 20:02:55 by sschelti          #+#    #+#             */
-/*   Updated: 2022/11/01 13:51:29 by sschelti         ###   ########.fr       */
+/*   Updated: 2022/11/08 20:17:11 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static unsigned int	ft_size(unsigned long a)
 	return (size);
 }
 
-static	void	fillstring(unsigned long a, unsigned int size, char *hex)
+static	void	fillstring(unsigned long a, int size, char *hex)
 {
 	hex[size] = '\0';
 	size--;
@@ -45,7 +45,8 @@ int	ft_printp(void *p)
 {
 	unsigned long	a;
 	char			*hex;
-	unsigned int	size;
+	int				size;
+	int				err;
 
 	if (!p)
 		return (ft_putstrp("0x0"));
@@ -53,23 +54,17 @@ int	ft_printp(void *p)
 	size = ft_size(a);
 	hex = (char *)malloc(sizeof(char) * (size + 1));
 	if (!hex)
-		return (0);
-	write(1, "0x", 2);
+		return (-1);
+	err = write(1, "0x", 2);
+	if (err == -1)
+	{
+		free(hex);
+		return (-1);
+	}
 	fillstring(a, size, hex);
 	size = ft_putstrp((const char *) hex);
 	free (hex);
+	if (size == -1)
+		return (-1);
 	return (size + 2);
 }
-
-// int main()
-// {
-// 	char	a;
-// 	void	*p;
-
-// 	a = 'a';
-// 	p = &a;
-// 	ft_printp(p);
-// 	printf("\n%p", p);
-// 	// printf("%p\n", p);
-// 	// printf("%p", &a);
-// }

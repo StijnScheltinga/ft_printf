@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:58:36 by sschelti          #+#    #+#             */
-/*   Updated: 2022/11/01 10:49:51 by sschelti         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:53:11 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 int	ft_putchrp(int a)
 {
 	unsigned char	c;
+	int				err;
 
 	c = (unsigned char) a;
-	write(1, &c, 1);
+	err = write(1, &c, 1);
+	if (err == -1)
+		return (-1);
 	return (1);
 }

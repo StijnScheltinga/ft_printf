@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:57:55 by sschelti          #+#    #+#             */
-/*   Updated: 2022/11/01 11:00:11 by sschelti         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:56:35 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 int	ft_putstrp(const char *str)
 {
 	int	i;
+	int	err;
 
 	i = 0;
 	if (!str)
 		return (ft_putstrp("(null)"));
 	while (str[i])
 	{
-		write(1, &str[i], 1);
+		err = write(1, &str[i], 1);
+		if (err == -1)
+			return (-1);
 		i++;
 	}
 	return (i);

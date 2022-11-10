@@ -6,7 +6,7 @@
 /*   By: sschelti <sschelti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:06:45 by sschelti          #+#    #+#             */
-/*   Updated: 2022/11/01 14:59:28 by sschelti         ###   ########.fr       */
+/*   Updated: 2022/11/10 11:58:13 by sschelti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,53 +15,63 @@
 
 static int	conversion(const char *str, va_list list, int i)
 {
-	int	length;
-
-	length = 0;
 	if (str[i] == 'c')
-		length += ft_putchrp(va_arg(list, int));
+		return (ft_putchrp(va_arg(list, int)));
 	if (str[i] == 's')
-		length += ft_putstrp(va_arg(list, const char *));
+		return (ft_putstrp(va_arg(list, const char *)));
 	if (str[i] == 'd' || str[i] == 'i')
-		length += ft_put_i(va_arg(list, int));
+		return (ft_put_i(va_arg(list, int)));
 	if (str[i] == 'p')
-		length += ft_printp(va_arg(list, void *));
+		return (ft_printp(va_arg(list, void *)));
 	if (str[i] == 'x')
-		length += ft_print_x(va_arg(list, unsigned int));
+		return (ft_print_x(va_arg(list, unsigned int)));
 	if (str[i] == 'X')
-		length += ft_print_x_up(va_arg(list, unsigned int));
+		return (ft_print_x_up(va_arg(list, unsigned int)));
 	if (str[i] == 'u')
-		length += ft_print_u(va_arg(list, unsigned int));
+		return (ft_print_u(va_arg(list, unsigned int)));
 	if (str[i] == '%')
-		length += ft_putchrp('%');
-	return (length);
+		return (ft_putchrp('%'));
+	return (-1);
 }
 
-int	ft_printf(const char *str, ...)
+int	ft_check(const char	*str, va_list list)
 {
-	int		i;
-	int		length;
-	va_list	list;
+	int	length;
+	int	i;
+	int	ret;
 
-	i = 0;
 	length = 0;
-	if (!str)
-		return (0);
-	va_start(list, str);
+	i = 0;
+	ret = 0;
 	while (str[i])
 	{
 		if (str[i] == '%')
 		{
-			length += conversion(str, list, (i + 1));
+			length = conversion(str, list, (i + 1));
 			i++;
 		}
 		else
-			length += ft_putchrp(str[i]);
-		if (str[i] != '\0')
-			i++;
+			length = ft_putchrp(str[i]);
+		if (length == -1)
+			return (-1);
+		i++;
+		ret += length;
 	}
+	return (ret);
+}
+
+int	ft_printf(const char *str, ...)
+{
+	va_list	list;
+	int		ret;
+
+	ret = 0;
+	if (!str)
+		return (-1);
+	va_start(list, str);
+	ret = ft_check(str, list);
 	va_end(list);
-	return (length);
+	return (ret);
 }
 
 // int	main()
@@ -73,9 +83,9 @@ int	ft_printf(const char *str, ...)
 
 // 	c = 'a';
 // 	arr = "hjghtetertrkltdk";
-// 	d = -22;
+// 	d = (int) NULL;
 // 	p = NULL;
-// 	printf("mijne: %d\n", ft_printf("hello%"));
-// 	// printf("echte: %d\n", printf("hello%"));
+// 	printf("mijne: %d\n", ft_printf("ba lab %d ", d));
+// 	// printf("\nechte: %d\n", printf(NULL));
 // 	return (0);
 // }
